@@ -1,17 +1,18 @@
 #include <iostream>
-#include <list>
+#include <vector>
 #include "Point.h"
 #include <cmath>
 
 using namespace std;
 double generate_random_number(){
-     return 1 + rand() % 45;
+    double result = 3 + rand() % 67;
+     return result;
 }
 
 Point generate_random_point(){
 
         double x ,y , z ;
-
+        int id = 1 + rand() % 452;
         //get random position
         x = generate_random_number();
         y = generate_random_number();
@@ -20,98 +21,98 @@ Point generate_random_point(){
         Point point;
         point.set_position(x,y,z);
         // add point in  list
-
-
-        // null points
-        x = 0 ;
-        y = 0 ;
-        z = 0 ;
-
-
+        point.id = id;
         return point;
 
 }
 
-//generate random amount of points
+void calculate_root_model(vector<Point> root , vector<Point> points , Point point_A , double fast_distance  ){
 
-void generate_points(list<Point> &lst , int amount_points){
-    for(int i = 0 ; i <= amount_points ; i++){
-        lst.push_front(generate_random_point());
-    }
-}
-list<Point> accros_list(list<Point> &lst , Point point_start ,list<Point> &root , double fast_distance){
+
+    //Point point_A; // start point
+    //Point point_C; // end point
+    double temporal_x;
+    double temporal_y;
+    double temporal_z;
+
     //across all list to find fast distance.
+
     double distance ;
     double summ , summ_1 , summ_2 , summ_3;
-    double temporal_x ;
-    double temporal_y ;
-    double temporal_z ;
 
-    do {
-    for (std::list<Point>::iterator i = lst.begin(); i != lst.end(); ++i){
-     temporal_x = i->x_position;
-     temporal_y = i->y_position;
-     temporal_z = i->z_position;
-     summ_1 =  temporal_x - point_start.x_position;
-     summ_2 =  temporal_y - point_start.y_position;
-     summ_3 =  temporal_z - point_start.z_position;
+
+
+    for (int i = 0 ; i != points.size(); i++){
+     cout<<root[i].x_position<<" "<<root[i].y_position<<endl;
+     summ_1 =  points[i].x_position; - point_A.x_position;
+     summ_2 =  points[i].y_position; - point_A.y_position;
+     summ_3 =  points[i].z_position; - point_A.z_position;
      summ_1 = pow(summ_1,2);
      summ_2 = pow(summ_2,2);
      summ_3 = pow(summ_3,2);
      summ = summ_1+summ_2+summ_3;
+     cout<<"Summ:"<<summ<<endl;
+     cout<<"points:"<<points[i].y_position<<endl;
+     distance = sqrt(summ);
+     cout<<"Distance:"<<distance<<endl;
+
      distance = sqrt(summ);
      if(distance < fast_distance){
+
         fast_distance = distance; // we found closet point.
-        Point point ;
-        point.x_position = i->x_position ;
-        point.y_position = i->y_position ;
-        point.z_position = i->z_position ;
-        root.push_front(point); // add in root .
+
+        cout<<"x:"<<points[i].x_position <<endl;
+
+        root.push_back(points[i]); // add in root .
+        cout<<"x root:"<<root[i].x_position <<endl;
         // current point is start point now.
-        point_start.x_position = i->x_position ;
-        point_start.y_position = i->y_position ;
-        point_start.z_position = i->z_position ;
+        point_A.x_position = points[i].x_position ;
+        point_A.y_position = points[i].y_position ;
+        point_A.z_position = points[i].z_position ;
+        //remove from points
+        points.erase(points.begin() + points[i].id);
+
+        calculate_root_model(root,points,point_A ,fast_distance );
 
 
      }
+
     }
 
 
 
-    }while(lst.size() >= 3);
 
-    return root;
+
 }
+
+
+
 int main()
 {
-    double small_distance = 1000000; // number was taken to initialize search.
-    Point point_A; // start point
-    Point point_C; // end point
-    double temporal_x;
-    double temporal_y;
-    double temporal_z;
-    list <Point>root; // points are added in the root
+
+    cout<<"SearchFastWay"<<endl;
+    vector<Point> root; // points are added in the root
 
     // create temporal object for searching a closet point.
 
-    point_A.set_position(1,2,3);
-    point_C.set_position(134,23,33);
+    double fast_distance = 1000000; // number was taken to initialize search.
+    Point point_A;
+    point_A.set_id(1);
+    point_A.id =1 + rand() % 452324;
 
-    list<Point>points;
+    vector<Point> points;
     // add start point in begin of root.
     root.push_back(point_A);
-    generate_points(points ,45);
-    //across all list to find fast distance.
-    list<Point> full_root = accros_list(points ,point_A ,root ,small_distance);
+    //generate random amount of points
 
-    for (std::list<Point>::iterator i = full_root.begin(); i != root.end(); ++i){
-     temporal_x = i->x_position;
-     temporal_y = i->y_position;
-     temporal_z = i->z_position;
-     cout<<temporal_x<< " " << temporal_y << " " << temporal_z<<endl;
+    for(int i = 0 ; i <= 45 ; i++){
+        points.push_back(generate_random_point());
+
     }
 
-    cout<<full_root.size()<<endl;
+    calculate_root_model(root,points,point_A , fast_distance);
+
+
     system("pause");
     return 0;
 }
