@@ -1,3 +1,11 @@
+/*
+     Algorithm is designed for calculated
+     the closest root in 3d coordinates .
+
+     Author : fandimfromitaly@yandex.ru
+     2022 year.
+
+*/
 #include <iostream>
 #include <vector>
 #include "Point.h"
@@ -79,13 +87,7 @@ void calculate_root_model(vector<Point> root , vector<Point> points , Point poin
 
     }
 
-
-
-
-
 }
-
-
 
 int main()
 {
@@ -109,7 +111,7 @@ int main()
         points.push_back(generate_random_point());
 
     }
-
+    //calculate root
     calculate_root_model(root,points,point_A , fast_distance);
 
 
