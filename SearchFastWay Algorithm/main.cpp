@@ -13,7 +13,7 @@
 
 using namespace std;
 double generate_random_number(){
-    double result = 3 + rand() % 67;
+    double result = 3 + rand() % 300;
      return result;
 }
 
@@ -34,18 +34,19 @@ Point generate_random_point(){
 
 }
 
-void calculate_root_model(vector<Point> root , vector<Point> points , Point point_A , double fast_distance  ){
+
+
+
+double calculate_root_model(vector<Point> root , vector<Point> points , Point point_A , double fast_distance  ){
 
 
     //Point point_A; // start point
     //Point point_C; // end point
-    double temporal_x;
-    double temporal_y;
-    double temporal_z;
+
 
     //across all list to find fast distance.
 
-    double distance ;
+    double distance , final_distance;
     double summ , summ_1 , summ_2 , summ_3;
 
 
@@ -81,13 +82,19 @@ void calculate_root_model(vector<Point> root , vector<Point> points , Point poin
         points.erase(points.begin() + points[i].id);
 
         calculate_root_model(root,points,point_A ,fast_distance );
+        final_distance += distance;
 
 
      }
 
     }
 
+
+    return final_distance;
+
 }
+
+
 
 int main()
 {
@@ -98,6 +105,7 @@ int main()
     // create temporal object for searching a closet point.
 
     double fast_distance = 1000000; // number was taken to initialize search.
+    double final_distance;
     Point point_A;
     point_A.set_id(1);
     point_A.id =1 + rand() % 452324;
@@ -107,13 +115,15 @@ int main()
     root.push_back(point_A);
     //generate random amount of points
 
-    for(int i = 0 ; i <= 45 ; i++){
+    for(int i = 0 ; i <= 39 ; i++){
         points.push_back(generate_random_point());
 
     }
-    //calculate root
-    calculate_root_model(root,points,point_A , fast_distance);
 
+    //main function
+    final_distance = calculate_root_model(root,points,point_A , fast_distance);
+
+    cout<<"Final Distance:"<<final_distance<<endl;
 
     system("pause");
     return 0;
