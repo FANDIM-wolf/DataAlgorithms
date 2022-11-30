@@ -59,7 +59,7 @@ vector<string> from_string_to_vector(string raw_string){
          
                 
                 supposed_string.erase();
-                cout<<"AFTER ERASE "<<supposed_string<<endl;
+                
             
                 math_symbol.erase();
                 
