@@ -10,31 +10,7 @@
 #include <cstring>
 using namespace std;
 
-string define_accurate_name_of_variable(string var) {
-	string accurate_name;
-	for (int i = 0; i <= var.length(); i++) {
-		if (var[i] != ' ') {
-			accurate_name += var[i];
-		}
-	}
 
-	return accurate_name;
-}
-
-//returns 1 if variable already exists.
-int  is_variable_already_exists(string name_of_variable) {
-	
-	elem object_for_checking;
-	for (auto i : ELEMENTS) {
-	    cout<<"NAME:"<<i.name<<" "<<name_of_variable<<endl;
-	    if(name_of_variable == i.name){
-	        
-	        return i.value;
-	    }
-	}
-
-    return 0;	
-}
 vector<string> from_string_to_vector(string raw_string){
     
     raw_string += "+e";
