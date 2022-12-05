@@ -22,11 +22,11 @@ vector<string> from_string_to_vector(string raw_string){
     vector<string> tokens;
      for(int i = 0; i<= raw_string.length()+1; i++ )
     {
-    if( raw_string[i] != '+' || raw_string[i] != '-' || raw_string[i] != '/' || raw_string[i] != '*' ){
+    if( raw_string[i] != '+' || raw_string[i] != '-' || raw_string[i] != '/' || raw_string[i] != '*' || raw_string[i] != '(' || raw_string[i] != ')' ){
             
             supposed_string += raw_string[i];
         }
-    if( raw_string[i] == '+' || raw_string[i] == '-' || raw_string[i] == '/' || raw_string[i] == '*'){
+    if( raw_string[i] == '+' || raw_string[i] == '-' || raw_string[i] == '/' || raw_string[i] == '*' || raw_string[i] == '(' || raw_string[i] == ')'){
           
             
        
