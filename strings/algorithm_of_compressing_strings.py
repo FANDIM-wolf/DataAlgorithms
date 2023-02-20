@@ -5,7 +5,7 @@ x = 1
 j = message[x:x+1]
 for i in message:
     
-    if i in j:
+   if i in j:
         
         cnt += 1
    else:
