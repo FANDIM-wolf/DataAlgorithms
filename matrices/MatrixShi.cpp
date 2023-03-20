@@ -1,5 +1,5 @@
 
-// Online C++ Compiler - Build, Compile and Run your C++ programs online in your favorite browser
+//library to solve tasks related to matrices
 
 #include<iostream>
 
