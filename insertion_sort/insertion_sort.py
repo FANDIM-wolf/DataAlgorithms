@@ -1,5 +1,5 @@
 
-# Online Python - IDE, Editor, Compiler, Interpreter
+# insertion sort :)
 def insertion_sort(arr):
     indexing_length = range(1,len(arr))
     for i in indexing_length:
