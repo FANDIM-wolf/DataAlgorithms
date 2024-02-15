@@ -1,79 +1,71 @@
+/*
+Stack realization
+
+Authour : Shishov Mikhail
+*/
 #include <iostream>
 
 struct StackNode {
+    
     int data;
     StackNode* prev;
-    StackNode* next;
 };
 
 class Stack {
- private:
-  StackNode* top_;
+private:
+    StackNode* top_; // top element of stack
 
- public:
-  Stack() : top_(nullptr) {}
-
-  void push(int element) {
-    StackNode* newNode = new StackNode{element, nullptr, top_};
-    if (top_ != nullptr) {
-      top_->prev = newNode;
-    }
-    top_ = newNode;
-  }
-
-  void pop() {
-    if (top_ != nullptr) {
-      StackNode* top = top_;
-      top_ = top_->next;
-      if (top_ != nullptr) {
-        top_->prev = nullptr;
-      }
-      delete top;
-    }
-  }
-
-  int top() const {
-    if (top_ != nullptr) {
-      return top_->data;
-    }
-    throw std::runtime_error("Stack is empty");
-  }
-
-  void printForward() const {
-    if (top_ == nullptr) {
-      std::cout << "Stack is empty" << std::endl;
-      return;
-    }
-    for (const auto& node : {top_, top_->next}) {
-      if (node != nullptr) {
-        std::cout << " -> ";
+public:
+    Stack() {
         
-      }
-      std::cout << node->data;
-     
+        top_ = nullptr;
     }
-    std::cout << std::endl;
-  }
-
-  void printReverse() const {
-    if (top_ == nullptr) {
-      std::cout << "Stack is empty" << std::endl;
-      return;
+    //add element in stack
+    void push(int element ) {
+        StackNode* newNode = new StackNode{ element , top_  };
+        if (top_ == nullptr) {
+            newNode->prev = top_;
+        }
+        newNode->prev = top_;
+        top_ = newNode;
+       
     }
-    for (auto it = top_; it != nullptr; it = it->prev) {
-      if (it->next != nullptr) {
-        std::cout << " -> ";
-      }
-      std::cout << it->data;
+    //remove element from stack
+    void pop() {
+        if (top_ != nullptr) {
+            StackNode* top = top_;
+            top_ = top_->prev;
+            delete top;
+        }
     }
-    std::cout << std::endl;
-  }
+   
+    //print all elements in forward
+    void printForward() const {
+        
+        if (top_ == nullptr) {
+            std::cout << "Stack is empty" << std::endl;
+            return;
+        }
+        StackNode* current_node = top_;
+        while (current_node != nullptr) {
+            std::cout << "->";
+            std::cout << current_node->data << std::endl;
+            current_node = current_node->prev;
+        }
+       
+    }
+   
 };
 
 int main() {
+    
     Stack s;
     s.push(2);
     s.push(4);
+    s.push(5);
+    s.printForward();
+    std::cout << "After removing" << std::endl;
+    s.pop();
     s.printForward();
     return 0;
 }
