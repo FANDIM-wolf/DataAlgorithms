@@ -1,3 +1,6 @@
+/*
+Author: Mikhail Shishov
+*/
 public class ZellersAlgorithm {
 
     public static String getDayOfWeek(int d, int m, int y) {
